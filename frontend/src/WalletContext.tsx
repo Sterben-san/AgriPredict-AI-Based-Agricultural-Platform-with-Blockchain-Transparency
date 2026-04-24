@@ -44,9 +44,15 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({
   >([]);
 
   useEffect(() => {
-    // Restore wallet from localStorage
-    const savedWallet = localStorage.getItem("global_wallet_address");
-    const savedRole = localStorage.getItem("global_user_role");
+    // Restore wallet from localStorage (wrapped for sandbox safety)
+    let savedWallet: string | null = null;
+    let savedRole: string | null = null;
+    try {
+      savedWallet = localStorage.getItem("global_wallet_address");
+      savedRole = localStorage.getItem("global_user_role");
+    } catch (e) {
+      console.warn("localStorage not available");
+    }
 
     if (savedWallet) {
       setWalletAddress(savedWallet);
@@ -189,7 +195,7 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({
     try {
       // First check database
       const data = await getUserRole(address);
-      if (data.role) {
+      if (data && data.role) {
         setUserRole(data.role as Role);
         localStorage.setItem("global_user_role", data.role);
         setIsNewUser(false);
@@ -415,4 +421,4 @@ export const useWallet = () => {
   return context;
 };
 
-export default Index;
+// WalletContext - no default export needed
