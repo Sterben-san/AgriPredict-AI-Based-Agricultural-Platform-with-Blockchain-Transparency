@@ -414,3 +414,5 @@ export const useWallet = () => {
   }
   return context;
 };
+
+export default ETH_TO_INR_RATE;

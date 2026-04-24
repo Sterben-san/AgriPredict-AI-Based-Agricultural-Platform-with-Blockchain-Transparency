@@ -2,11 +2,11 @@ import { motion } from "framer-motion";
 import { Leaf, Menu, X, LogIn, UserPlus } from "lucide-react";
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { useWallet } from "@/contexts/WalletContext";
 import { Wallet } from "lucide-react";
-import SignInModal from "../SignInModal";
-import SignUpModal from "../SignUpModal";
+import SignInModal from "./SignInModal";
+import SignUpModal from "./SignUpModal";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);

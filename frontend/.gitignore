@@ -51,3 +51,5 @@ ignition/deployments/
 # Windows reserved device names
 nul
 NUL
+.vercel
+.env*.local
