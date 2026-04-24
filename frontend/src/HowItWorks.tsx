@@ -1,76 +1,95 @@
 import { motion } from "framer-motion";
-import { Leaf, Github, Twitter, Linkedin } from "lucide-react";
+import { Calendar, Brain, CheckCircle, ArrowRight } from "lucide-react";
 
-const Footer = () => {
+const steps = [
+  {
+    icon: Calendar,
+    step: "01",
+    title: "Input Details",
+    description: "Select your date, state, and market for accurate predictions",
+    color: "bg-primary",
+  },
+  {
+    icon: Brain,
+    step: "02",
+    title: "AI Analysis",
+    description: "Random Forest & XGBoost models process your request instantly",
+    color: "bg-secondary",
+  },
+  {
+    icon: CheckCircle,
+    step: "03",
+    title: "Decision Ready",
+    description: "Get precise price predictions and demand level forecasts",
+    color: "bg-accent",
+  },
+];
+
+const HowItWorks = () => {
   return (
-    <footer className="py-16 border-t border-border">
+    <section id="how-it-works" className="py-24">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-4 gap-12 mb-12">
-          {/* Brand */}
-          <div className="md:col-span-2">
-            <motion.a
-              href="#"
-              className="flex items-center gap-2 mb-4"
-              whileHover={{ scale: 1.02 }}
-            >
-              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
-                <Leaf className="w-6 h-6 text-primary-foreground" />
-              </div>
-              <span className="text-xl font-bold text-foreground">
-                Agri<span className="text-primary">Predict</span>
-              </span>
-            </motion.a>
-            <p className="text-muted-foreground max-w-sm mb-6">
-              Empowering farmers and traders with AI-driven agricultural insights for smarter decision-making.
-            </p>
-            <div className="flex items-center gap-4">
-              <a href="#" className="p-2 rounded-lg bg-muted hover:bg-primary/10 transition-colors">
-                <Twitter className="w-5 h-5 text-muted-foreground hover:text-primary" />
-              </a>
-              <a href="#" className="p-2 rounded-lg bg-muted hover:bg-primary/10 transition-colors">
-                <Github className="w-5 h-5 text-muted-foreground hover:text-primary" />
-              </a>
-              <a href="#" className="p-2 rounded-lg bg-muted hover:bg-primary/10 transition-colors">
-                <Linkedin className="w-5 h-5 text-muted-foreground hover:text-primary" />
-              </a>
-            </div>
-          </div>
-
-          {/* Links */}
-          <div>
-            <h4 className="font-bold mb-4">Product</h4>
-            <ul className="space-y-3">
-              <li><a href="#features" className="text-muted-foreground hover:text-primary transition-colors">Features</a></li>
-              <li><a href="#how-it-works" className="text-muted-foreground hover:text-primary transition-colors">How It Works</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">API Access</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Documentation</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-bold mb-4">Company</h4>
-            <ul className="space-y-3">
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">About Us</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Blog</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Careers</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Contact</a></li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Bottom Bar */}
-        <div className="pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-muted-foreground">
-            © 2026 AgriPredict. All rights reserved.
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
+            How It Works
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            Simple <span className="text-gradient">Three-Step</span> Process
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            Get accurate price predictions in seconds with our streamlined workflow
           </p>
-          <div className="flex items-center gap-6 text-sm text-muted-foreground">
-            <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
-          </div>
+        </motion.div>
+
+        {/* Steps */}
+        <div className="grid md:grid-cols-3 gap-6 md:gap-4 relative">
+          {/* Connecting Line */}
+          <div className="hidden md:block absolute top-24 left-[20%] right-[20%] h-0.5 bg-gradient-to-r from-primary via-secondary to-accent opacity-30" />
+
+          {steps.map((step, index) => (
+            <motion.div
+              key={step.title}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.15 }}
+              className="relative"
+            >
+              <div className="glass-card p-8 h-full group hover:shadow-glow transition-all duration-500">
+                {/* Step Number */}
+                <div className="absolute -top-3 -right-3 w-12 h-12 rounded-full bg-foreground text-background flex items-center justify-center font-bold text-lg">
+                  {step.step}
+                </div>
+
+                {/* Icon */}
+                <div className={`w-16 h-16 ${step.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                  <step.icon className="w-8 h-8 text-primary-foreground" />
+                </div>
+
+                {/* Content */}
+                <h3 className="text-xl font-bold mb-3">{step.title}</h3>
+                <p className="text-muted-foreground">{step.description}</p>
+
+                {/* Arrow for desktop */}
+                {index < steps.length - 1 && (
+                  <div className="hidden md:flex absolute -right-4 top-1/2 -translate-y-1/2 z-10">
+                    <ArrowRight className="w-8 h-8 text-muted-foreground/30" />
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
-    </footer>
+    </section>
   );
 };
 
-export default Footer;
+export default HowItWorks;

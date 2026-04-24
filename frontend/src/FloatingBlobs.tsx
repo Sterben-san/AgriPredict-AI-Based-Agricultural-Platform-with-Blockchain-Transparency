@@ -1,88 +1,69 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles } from "lucide-react";
-import { Button } from "./ui/button";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-const CTASection = () => {
-  const [commodity, setCommodity] = useState("");
-  const navigate = useNavigate();
-
+const FloatingBlobs = () => {
   return (
-    <section className="py-24">
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="glass-card p-12 md:p-16 text-center relative overflow-hidden"
-        >
-          {/* Decorative Elements */}
-          <div className="absolute top-0 left-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 right-0 w-64 h-64 bg-secondary/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+    <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+      {/* Primary green blob */}
+      <motion.div
+        className="floating-blob w-[600px] h-[600px] bg-blob-1 top-[-200px] left-[-200px]"
+        animate={{
+          x: [0, 50, -30, 0],
+          y: [0, -40, 30, 0],
+          scale: [1, 1.1, 0.95, 1],
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      
+      {/* Golden blob */}
+      <motion.div
+        className="floating-blob w-[500px] h-[500px] bg-blob-2 top-[20%] right-[-150px]"
+        animate={{
+          x: [0, -60, 40, 0],
+          y: [0, 50, -30, 0],
+          scale: [1, 0.9, 1.1, 1],
+        }}
+        transition={{
+          duration: 25,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      
+      {/* Sky blue blob */}
+      <motion.div
+        className="floating-blob w-[450px] h-[450px] bg-blob-3 bottom-[-100px] left-[30%]"
+        animate={{
+          x: [0, 40, -50, 0],
+          y: [0, -30, 40, 0],
+          scale: [1, 1.05, 0.95, 1],
+        }}
+        transition={{
+          duration: 22,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
 
-          <div className="relative z-10">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/20 mb-6"
-            >
-              <Sparkles className="w-4 h-4 text-secondary" />
-              <span className="text-sm font-semibold text-foreground">
-                Ready to Get Started?
-              </span>
-            </motion.div>
-
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Try a Quick Prediction
-            </h2>
-            <p className="text-muted-foreground text-lg mb-10 max-w-xl mx-auto">
-              Enter a commodity name and see our ML models in action
-            </p>
-
-            {/* Quick Prediction Input */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-xl mx-auto">
-              <div className="relative flex-1 w-full">
-                <input
-                  type="text"
-                  value={commodity}
-                  onChange={(e) => setCommodity(e.target.value)}
-                  placeholder="Enter commodity (e.g., Ragi, Sunflower)"
-                  className="w-full h-14 px-6 rounded-full bg-background border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-foreground placeholder:text-muted-foreground"
-                />
-              </div>
-              <Button 
-                variant="hero" 
-                size="lg" 
-                className="w-full sm:w-auto group"
-                onClick={() => navigate("/dashboard")}
-              >
-                Predict Now
-                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </div>
-
-            {/* Popular Commodities */}
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
-              <span className="text-sm text-muted-foreground">Popular:</span>
-              {["Ragi", "Jowar", "Sunflower", "Groundnut"].map((item) => (
-                <button
-                  key={item}
-                  onClick={() => setCommodity(item)}
-                  className="px-4 py-1.5 rounded-full bg-muted hover:bg-primary/10 text-sm font-medium transition-colors"
-                >
-                  {item}
-                </button>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-      </div>
-    </section>
+      {/* Small accent blob */}
+      <motion.div
+        className="floating-blob w-[300px] h-[300px] bg-blob-1/50 bottom-[30%] right-[10%]"
+        animate={{
+          x: [0, -30, 20, 0],
+          y: [0, 20, -40, 0],
+          scale: [1, 1.15, 0.9, 1],
+        }}
+        transition={{
+          duration: 18,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+    </div>
   );
 };
 
-export default CTASection;
+export default FloatingBlobs;

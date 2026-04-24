@@ -1,69 +1,105 @@
 import { motion } from "framer-motion";
+import { ArrowRight, TrendingUp } from "lucide-react";
+import { Button } from "./ui/button";
+import { useNavigate } from "react-router-dom";
 
-const FloatingBlobs = () => {
+const HeroSection = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-      {/* Primary green blob */}
-      <motion.div
-        className="floating-blob w-[600px] h-[600px] bg-blob-1 top-[-200px] left-[-200px]"
-        animate={{
-          x: [0, 50, -30, 0],
-          y: [0, -40, 30, 0],
-          scale: [1, 1.1, 0.95, 1],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-      
-      {/* Golden blob */}
-      <motion.div
-        className="floating-blob w-[500px] h-[500px] bg-blob-2 top-[20%] right-[-150px]"
-        animate={{
-          x: [0, -60, 40, 0],
-          y: [0, 50, -30, 0],
-          scale: [1, 0.9, 1.1, 1],
-        }}
-        transition={{
-          duration: 25,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-      
-      {/* Sky blue blob */}
-      <motion.div
-        className="floating-blob w-[450px] h-[450px] bg-blob-3 bottom-[-100px] left-[30%]"
-        animate={{
-          x: [0, 40, -50, 0],
-          y: [0, -30, 40, 0],
-          scale: [1, 1.05, 0.95, 1],
-        }}
-        transition={{
-          duration: 22,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
+    <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+      <div className="container mx-auto px-4 py-20">
+        <div className="max-w-4xl mx-auto text-center">
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+            </span>
+            <span className="text-sm font-medium text-primary">
+              Now with 2026 Market Data
+            </span>
+          </motion.div>
 
-      {/* Small accent blob */}
-      <motion.div
-        className="floating-blob w-[300px] h-[300px] bg-blob-1/50 bottom-[30%] right-[10%]"
-        animate={{
-          x: [0, -30, 20, 0],
-          y: [0, 20, -40, 0],
-          scale: [1, 1.15, 0.9, 1],
-        }}
-        transition={{
-          duration: 18,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-    </div>
+          {/* Main Heading */}
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-5xl md:text-7xl font-extrabold leading-tight mb-6"
+          >
+            Transform{" "}
+            <span className="text-gradient">Agriculture</span>
+            <br />
+            Into Knowledge
+          </motion.h1>
+
+          {/* Subheading */}
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
+          >
+            Get instant ML-powered price predictions and market demand forecasts 
+            for Millets & Oilseeds. Make smarter decisions with AI-driven insights.
+          </motion.p>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
+            <Button 
+              variant="hero" 
+              size="lg" 
+              className="group"
+              onClick={() => navigate("/dashboard")}
+            >
+              Start Predicting
+              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+            </Button>
+            <Button 
+              variant="heroOutline" 
+              size="lg"
+              onClick={() => navigate("/dashboard")}
+            >
+              <TrendingUp className="w-5 h-5" />
+              View Trends
+            </Button>
+          </motion.div>
+
+          {/* Trust indicators */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="mt-16 flex flex-wrap items-center justify-center gap-8 text-sm text-muted-foreground"
+          >
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-primary"></div>
+              <span>Trusted by 10,000+ farmers</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-secondary"></div>
+              <span>100% Free to use</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-accent"></div>
+              <span>Real-time data</span>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
   );
 };
 
-export default FloatingBlobs;
+export default HeroSection;
