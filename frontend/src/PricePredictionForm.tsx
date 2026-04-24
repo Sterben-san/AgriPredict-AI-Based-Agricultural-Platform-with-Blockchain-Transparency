@@ -153,11 +153,11 @@ const BuyerDashboard = () => {
         toast.success("Transaction confirmed!");
       } else {
         // Fallback: Use Hardhat local node
-        provider = new ethers.JsonRpcProvider("http://localhost:8545");
+        provider = new ethers.JsonRpcProvider(import.meta.env.VITE_BLOCKCHAIN_URL || "http://localhost:8545");
         
         // For Hardhat local node, we need to use eth_sendTransaction
         // which auto-signs for accounts it manages
-        const response = await fetch("http://localhost:8545", {
+        const response = await fetch(import.meta.env.VITE_BLOCKCHAIN_URL || "http://localhost:8545", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

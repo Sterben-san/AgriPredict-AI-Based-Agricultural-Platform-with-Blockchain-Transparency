@@ -101,7 +101,7 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({
         setBalance(balanceEth.toFixed(4));
       } else {
         // Fallback to local JSON-RPC
-        const response = await fetch("http://localhost:8545", {
+        const response = await fetch(import.meta.env.VITE_BLOCKCHAIN_URL || "http://localhost:8545", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -125,7 +125,7 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const fetchHardhatAccounts = async () => {
     try {
-      const response = await fetch("http://localhost:8545", {
+      const response = await fetch(import.meta.env.VITE_BLOCKCHAIN_URL || "http://localhost:8545", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -202,7 +202,7 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({
       if (accounts.length === 0) {
         // Fetch accounts synchronously
         try {
-          const response = await fetch("http://localhost:8545", {
+          const response = await fetch(import.meta.env.VITE_BLOCKCHAIN_URL || "http://localhost:8545", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
