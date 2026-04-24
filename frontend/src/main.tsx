@@ -1,3 +1,10 @@
-import { useToast, toast } from "@/hooks/use-toast";
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App.tsx";
 
-export { useToast, toast };
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
