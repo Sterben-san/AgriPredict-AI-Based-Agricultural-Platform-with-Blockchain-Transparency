@@ -1,3 +1,6 @@
-import { useToast, toast } from "@/hooks/use-toast";
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
 
-export { useToast, toast };
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
